@@ -1,0 +1,1198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Peer Query">
+	<meta property="og:title" content="Peer Query">
+	<meta property="og:description" content="">
+	<meta property="og:image" content="https://www.peerquery.com/images/peerquery.png">
+	<meta property="fb:app_id" content="384491628645652">
+	<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+	<meta name="application-name" content="Peer Query">
+	<title>Peer Query</title>
+	
+	
+	
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="/assets/styles.css">
+	
+    <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
+	
+	<script src="https://steemit.github.io/sc2-angular/sc2.min.js"></script>
+	
+	<script src="/assets/timeago.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.7/marked.js"></script>
+	
+	
+
+  
+
+  </head>
+
+  <body>
+  
+  
+  	<div id="navbar"></div>
+	
+	
+	
+  <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+
+		<img src="/images/avatar.png" onerror="this.src='/images/avatar.png'" class="rounded-circle float-left" style="height:80px; margin-right: 10px" id="authorPic" alt="@avatar">
+    <div class="lead" style="font-size:5.5vw"><span id="authorName"></span> writes...</div>
+	
+	
+    <p class="lead" id="supportInfo"></p>
+	
+		
+  </div>
+</div>
+
+  
+  
+    <div class="container" style="margin-top: 50px">
+  <div class="row">
+    <div class="col-sm-9 card-footer" id="container">
+		
+	
+	
+	<div class="loader" id="spinnerQ"></div>
+	
+	
+	
+	
+	
+<div class="card border-light mb-3" style="display:none;" id="qDiv">
+	<div class="card-header" style="padding-bottom:40px">
+		
+<div class="card-text">
+	<div class="">
+		<h5>
+		<h1 class="lead" style="font-size:5.5vw" id="title"></h1>
+		<br/>
+	  <img src="" class="rounded-circle in-line" style="height:30px;" id="authorTN" alt="@account">
+			<a href="" class="badge badge-pill badge-info" id="author"></a>
+		</h5>
+		
+		<div class="float-right">
+			<span class="badge badge-primary fa fa-clock-o timeago" id="created"></span>
+			<a href="" class="badge badge-primary fa fa-tag" id="category"></a>
+		</div>
+		
+		<hr/>
+		
+		<p class="lead" id="qbody"></p>
+		
+		<br/>	<hr/>	<br/>
+		
+			
+	<div id="contributeDiv" style="display:none">
+<form class="card card-body" style="margin-top:50px; margin-bottom:50px;" id="resForm" novalidate>
+	
+			<div class="form-group">
+				<textarea class="form-control" id="res-Body" rows="3" placeholder="Enter your response..." required></textarea>
+				    <div class="invalid-feedback">
+						Please provide response.
+					</div>
+			</div>
+			<div class="form-check">
+				<label class="custom-control custom-checkbox">
+					<input type="checkbox" id="accept-terms" class="custom-control-input" required>
+						<span class="custom-control-indicator"></span>
+						<span class="custom-control-description small"> I understand & consent that my response and any data associated with it will be permanently and publicly published to the Steem Blockchain.</span>
+					</label>
+
+			</div>
+	
+	<button class="btn btn-primary" id="publish-res" type="submit">Publish Response</button>
+  
+</form>
+	</div>
+
+
+<div id="slidecontainer" style="display:none">
+  <input type="range" min="100" max="10000" value="500" class="slider" id="qRange">
+	<button class="btn btn-primary btn-sm fa fa-thumbs-up float-right" type="button"  data-value="500"  data-href="" style="margin-top:-10px; margin-left: 5px;" id="qVoteBtn" data-votestate="false" data-author="" onClick="vote(this.id)"> +5%</button>
+</div>
+
+<br/>
+	
+    <div class="" style="">
+		<li href="#" class="btn btn-primary fa fa-comment" id="showContributeForm"> Contribute</li>
+		<a href="#" class="btn btn-warning fa fa-share" id="resteemBtn" data-account="" data-author="" data-href=""> Resteem</a>
+		<a href="javascript:void(0);" class="btn btn-success fa fa-chevron-circle-up float-right" id="qVote" data-vState="false" onClick="votePanelBtn(this.id);"> Vote</a>
+	</div>
+
+	
+		
+	
+			<div class="alert alert-light" id="infoDiv" style="display:none; margin-top: 50px; background-color: #f7f7f7">
+	
+	
+<div class="row justify-content-center" style="margin-top: 5px;" id="">
+
+		<div class="col text-center rounded hov" style="background-color: #a7f7f9;">
+			<span class="fa fa-usd" aria-hidden="true"></span>
+			<h1 id="cash"></h1>
+			Earned
+		</div>
+		<div class="col text-center rounded hov" style="background-color: #ddd7f9; margin-left: 2vw">
+			<span class="fa fa-caret-up" aria-hidden="true"></span>
+			<h1 id="voteCount"></h1>
+			Votes
+		</div>
+		<div class="col text-center rounded hov" style="background-color: #6fcef99e; margin-left: 2vw">
+			<span class="fa fa-comments-o" aria-hidden="true"></span>
+			<h1 id="responseCount"></h1>
+			Responses
+		</div>
+	
+		<hr/>
+		<small>*Replies to responses are disabled and hidden on this client.</small>
+</div>
+		
+		
+	</div>
+		
+	</div>
+	
+
+
+	</div>
+
+
+
+
+</div>
+</div>
+	
+	
+
+	
+	
+<ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist" style="visibility:hidden">
+  <li class="nav-item">
+    <a class="nav-link active" id="mostvoted-tab" data-toggle="tab" href="#mostvotedRes" role="tab" aria-controls="mostvoted" aria-selected="true">Most voted</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="trending-tab" data-toggle="tab" href="#trendingRes" role="tab" aria-controls="trending" aria-selected="false">Trending</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="newest-tab" data-toggle="tab" href="#newestRes" role="tab" aria-controls="newest" aria-selected="false">Newest</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="oldest-tab" data-toggle="tab" href="#oldestRes" role="tab" aria-controls="oldest" aria-selected="false">Oldest</a>
+  </li>
+</ul>
+
+
+<div class="tab-content" id="resTabContentDivs">
+
+  
+  <div class="tab-pane fade show active" id="mostvotedRes" role="tabpanel" aria-labelledby="mostvoted-tab">
+		<br/>
+		
+		
+		
+	<div class="loader" id="spinnerMostVotedRes" style="display:none"></div>
+	
+	
+	
+	
+			<div id="mvrContainer"></div>
+			
+  </div>
+  
+  
+  <div class="tab-pane fade" id="trendingRes" role="tabpanel" aria-labelledby="trending-tab">
+		<br/>
+		
+		
+		
+	<div class="loader" id="spinnerTrendRes" style="display:none"></div>
+	
+	
+	
+			<div id="trContainer"></div>
+  </div>
+  
+  
+  <div class="tab-pane fade" id="newestRes" role="tabpanel" aria-labelledby="newest-tab">
+		<br/>
+		
+			
+	<div class="loader" id="spinnerNewRes" style="display:none"></div>
+	
+	
+		
+			<div id="nrContainer"></div>
+		
+  </div>
+
+  
+  <div class="tab-pane fade" id="oldestRes" role="tabpanel" aria-labelledby="oldest-tab">
+		<br/>
+		
+		
+	<div class="loader" id="spinnerOldRes" style="display:none"></div>
+	
+	
+	
+			<div id="orContainer"></div>
+		
+  </div>
+  
+  </div>
+	
+	
+
+	
+	
+	
+	</div>
+
+	
+
+  	
+    <div class="col-sm-3">
+
+	  	<div id="sidebar"></div>
+	
+    </div>
+	
+  </div>
+  </div>
+</div>
+
+
+	<div id="footer" style="margin-top: 50px"></div>
+
+
+	
+	
+	
+<script>
+//first load the navbar, sidebar and footer!
+	 $("#navbar").load("/navbar.html");
+     $("#sidebar").load("/sidebar.html");
+     $("#footer").load("/footer.html");
+	 
+	
+	steem.api.setOptions({ url: 'https://api.steemit.com' });
+	
+	
+	//get permLINK and author from URL
+let articleURL = window.location.pathname;
+let str = articleURL.substr(articleURL.indexOf("@") + 1);
+let permlink = str.substr(str.indexOf("/") + 1);
+	//console.log(permlink);
+let author = str.substring((str.indexOf("@") + 1), (str.indexOf("/")));
+	//console.log(author);
+	responses = [];
+	
+let arContainerID = "mvrContainer";
+
+let post_category = "";
+let parent_permlink = "";
+let parent_author = "";
+  
+	
+	
+	
+//get the Cookie: SC2A
+
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+
+	
+  
+  if (readCookie("SC2A") != null) {
+	document.getElementById('supportInfo').innerText = "Contribute to this query by responding or resteeming.";
+  	
+	//var authString = document.cookie.substring(15);
+	
+	//if (authString.indexOf(';') > -1) authString = authString.substr(0, authString.indexOf(';'));
+	
+	//console.log(authString);
+	
+	
+    var authInfo = readCookie("SC2A");
+    authInfo = window.atob(authInfo);
+    authInfo = JSON.parse(authInfo);
+	
+	//account = authInfo.username;	
+	activeAccount = authInfo.username;
+	document.getElementById('resteemBtn').dataset.account = authInfo.username;
+	
+	
+  } else {
+	document.getElementById('supportInfo').innerText = "Login to contribute to this query or create your own.";
+  
+	activeAccount = "";
+	
+  }
+  
+  
+		document.getElementById('authorName').innerText = author;
+		document.getElementById('authorPic').src = "https://img.busy.org/@" + author;
+  
+  
+  
+  
+//steem.api.setOptions({ url: 'wss://rpc.buildteam.io' });
+  
+
+
+steem.api.getContent(author, permlink, function(err, result) {
+	//console.log(err, result);
+  if (err) {
+	alert(err);
+	window.location.reload;
+  } else {
+	displayPost(result);
+	document.title = result.title + " - Peer Query";
+	checkVote(result, result.active_votes);
+	document.getElementById('spinnerQ').style.display = "none";
+	document.getElementById('myTab').style.visibility = "visible";
+	document.getElementById('qDiv').style.display = "block";
+	
+	post_category = result.parent_permlink
+	parent_author = result.author;
+	parent_permlink = result.permlink;
+	
+  }
+});
+
+
+steem.api.getContentReplies(author, permlink, function(err, responses) {
+  //console.log(err, responses);
+  if (err) {
+	alert (err);
+	window.location.reload;
+  } else {
+  document.getElementById('infoDiv').style.display = "block";
+  document.getElementById('responseCount').innerText = responses.length;
+   
+  responses = responses.sort(function(a, b){return b.net_votes - a.net_votes});
+			
+  showResponses(responses);
+   
+   responses = responses;
+	
+  }
+});
+
+
+
+
+
+
+
+$("#oldest-tab").click(function(){
+	//alert("oldest")
+	
+    //console.log(responses)
+	
+	document.getElementById('orContainer').innerHTML = "";
+	document.getElementById('nrContainer').innerHTML = "";
+	document.getElementById('trContainer').innerHTML = "";
+	document.getElementById('mvrContainer').innerHTML = "";
+	
+	arContainerID = "orContainer";
+	
+	
+	document.getElementById('infoDiv').style.display = "none";
+	document.getElementById('spinnerOldRes').style.display = "block";
+	
+	steem.api.getContentReplies(author, permlink, function(err, responses) {
+		//console.log(err, responses);
+			if (err) {
+				alert (err);
+				window.location.reload;
+			} else {
+			document.getElementById('infoDiv').style.display = "block";
+			document.getElementById('responseCount').innerText = responses.length;
+			
+			document.getElementById('spinnerOldRes').style.display = "none";
+	
+			showResponses(responses);
+	
+		}
+	});
+
+
+});
+
+
+
+$("#newest-tab").click(function(){
+	//alert("newest")
+	
+    //console.log(responses)
+	
+	document.getElementById('orContainer').innerHTML = "";
+	document.getElementById('nrContainer').innerHTML = "";
+	document.getElementById('trContainer').innerHTML = "";
+	document.getElementById('mvrContainer').innerHTML = "";
+	
+	arContainerID = "nrContainer";
+	
+	
+	document.getElementById('infoDiv').style.display = "none";
+	document.getElementById('spinnerNewRes').style.display = "block";
+	
+	steem.api.getContentReplies(author, permlink, function(err, responses) {
+		//console.log(err, responses);
+			if (err) {
+				alert (err);
+				window.location.reload;
+			} else {
+			document.getElementById('infoDiv').style.display = "block";
+			document.getElementById('responseCount').innerText = responses.length;
+   
+			responses = responses.sort(function(a, b){return b.id - a.id});
+			
+			document.getElementById('spinnerNewRes').style.display = "none";
+	
+			showResponses(responses);
+	
+		}
+	});
+
+
+
+	
+});
+
+
+$("#trending-tab").click(function(){
+	//alert("trending")
+	
+    //console.log(responses)
+	
+	document.getElementById('orContainer').innerHTML = "";
+	document.getElementById('nrContainer').innerHTML = "";
+	document.getElementById('trContainer').innerHTML = "";
+	document.getElementById('mvrContainer').innerHTML = "";
+	
+	arContainerID = "trContainer";
+	
+	
+	document.getElementById('infoDiv').style.display = "none";
+	document.getElementById('spinnerTrendRes').style.display = "block";
+	
+	steem.api.getContentReplies(author, permlink, async function(err, responses) {
+		//console.log(err, responses);
+			if (err) {
+				alert (err);
+				window.location.reload;
+			} else {
+			document.getElementById('infoDiv').style.display = "block";
+			document.getElementById('responseCount').innerText = responses.length;
+			
+			responses = await responses.sort(function(a, b) {
+			
+				var cash = Math.max(a.total_payout_value.split(' ')[0], a.total_payout_value.split(' ')[0]);
+			
+				var csh = Math.max(b.pending_payout_value.split(' ')[0], b.pending_payout_value.split(' ')[0]);
+			
+				if (cash > csh) return -1;
+				if (cash < csh) return 1;
+				
+			});
+			
+			
+			document.getElementById('spinnerTrendRes').style.display = "none";
+	
+			showResponses(responses);
+	
+		}
+	});
+
+
+
+});
+
+
+$("#mostvoted-tab").click(function(){
+	//alert("mostvoted")
+	
+    //console.log(responses)
+	
+	document.getElementById('orContainer').innerHTML = "";
+	document.getElementById('nrContainer').innerHTML = "";
+	document.getElementById('trContainer').innerHTML = "";
+	document.getElementById('mvrContainer').innerHTML = "";
+	
+	arContainerID = "mvrContainer";
+	
+	
+	document.getElementById('infoDiv').style.display = "none";
+	document.getElementById('spinnerMostVotedRes').style.display = "block";
+	
+	steem.api.getContentReplies(author, permlink, function(err, responses) {
+		//console.log(err, responses);
+			if (err) {
+				alert (err);
+				window.location.reload;
+			} else {
+			document.getElementById('infoDiv').style.display = "block";
+			document.getElementById('responseCount').innerText = responses.length;
+   
+			responses = responses.sort(function(a, b){return b.net_votes - a.net_votes});
+			
+			document.getElementById('spinnerMostVotedRes').style.display = "none";
+	
+			showResponses(responses);
+	
+		}
+	});
+
+
+
+});
+  
+
+
+function showResponses(responses) {
+
+	//alert("works");
+
+	for (x in responses) {
+		displayResponses(responses[x]);
+	}
+	for (x in responses) {
+		checkResponseVotes(responses[x], responses[x].net_votes);
+			
+		if (x == responses.length-1) {
+			responsesReady();
+			
+			for (x in responses) {
+				document.getElementById(responses[x].id + "-cash").innerText = " " + checkCash(responses[x]);
+			}
+		}
+	}
+}
+
+
+
+function countVotes(Votes) {
+
+var unVotes = Votes.reduce(function (n, vot) {
+    return n + (vot.percent == '0');
+}, 0);
+
+//console.log("Number of votes removed is: " + unVotes);
+
+return Votes.length - unVotes;
+}
+
+
+
+function displayPost(result) {
+	
+		document.getElementById('title').innerText = result.title;
+		document.getElementById('qbody').innerHTML = marked(result.body);	//converter.makeHtml(result.body);
+		reputation = steem.formatter.reputation(result.author_reputation);
+		document.getElementById('author').href = "/@" + result.author;
+		document.getElementById('author').innerText = " " + result.author + "(" + reputation + ")";
+		document.getElementById('cash').innerText = checkCash(result);
+		document.getElementById('responseCount').innerText = result.children;
+		document.getElementById('created').title = result.created;
+		document.getElementById('category').innerText = " " + result.parent_permlink;
+		//document.getElementById('category').href = "/tags/" + result.parent_permlink;
+		document.getElementById('category').href = "javascript:void(0)";
+		document.getElementById('authorTN').src = "https://img.busy.org/@" + author;
+		
+		document.getElementById('qVote').id = result.id;
+		document.getElementById('slidecontainer').id = result.id + "-div";
+		
+		document.getElementById('qVoteBtn').dataset.author = result.author;
+		document.getElementById('qVoteBtn').dataset.href = result.permlink;
+		document.getElementById('qVoteBtn').dataset.votestate = "false";
+		
+		document.getElementById('resteemBtn').dataset.author = result.author;
+		document.getElementById('resteemBtn').dataset.href = result.permlink;
+		
+		document.getElementById('qVoteBtn').id = result.id + "-btn";
+		
+		document.getElementById('qRange').id = result.id + "-range";
+		
+			
+	if (result.net_votes > 0) { 
+		document.getElementById('voteCount').innerText = " +" + countVotes(result.active_votes);
+	} else if (result.net_votes < 0) {
+		document.getElementById('voteCount').innerText = " -" + countVotes(result.active_votes);
+	} else if  (result.net_votes == 0) {
+		document.getElementById('voteCount').innerText = " 0";
+	}
+	
+		//displayResponses(post.replies)
+		
+		timeAgo();
+}
+	
+	
+function checkCash(pst) {
+  var cT = new Date();
+  var coT = new Date(pst.cashout_time);
+  
+  if (cT > coT) {
+  	return " " + (Number(pst.total_payout_value.split(' ')[0]) + Number(pst.curator_payout_value.split(' ')[0])).toFixed(2);
+  } else {
+	return " " + Math.max(pst.total_payout_value.split(' ')[0], pst.pending_payout_value.split(' ')[0]);
+  }
+
+}	
+
+	
+	
+function displayResponses(response) {
+
+	
+	var cCard = document.createElement("div");
+	cCard.className = "row ccard rounded";
+	cCard.style.marginTop = "20px";
+	
+	var divCol10 = document.createElement("div");
+	divCol10.className = "col-sm-10";
+	
+	var pImg = document.createElement("img");
+	pImg.className = "rounded-circle in-line";
+	pImg.onerror = function() {this.src='/images/avatar.png'};
+	pImg.style.height = "25px";
+	pImg.src = "https://img.busy.org/@" + response.author;
+	pImg.alt = response.author;
+	
+	var authorLink = document.createElement("a");
+	authorLink.className = "badge badge-pill badge-info";
+	authorLink.href = "/@" + response.author;
+	authorLink.style.marginLeft = "5px";
+	authorLink.innerHTML = " @" + response.author + "(" + steem.formatter.reputation(response.author_reputation) + ")";
+	
+	var br = document.createElement("br");
+	
+	var p = document.createElement("p");
+	p.className = "lead";
+	p.style.marginLeft = "5px";
+	p.innerHTML = marked(response.body);
+	
+	
+	
+	
+	
+
+
+
+	var divSlider = document.createElement("div");
+	divSlider.className = "";
+	divSlider.style.display = "none";
+	divSlider.innerHTML = "";
+	divSlider.id = response.id + "-div";
+
+	var rRange = document.createElement("input");
+	rRange.className = "slider";
+	rRange.type = "range";
+	rRange.min = "100";
+	rRange.max = "10000";
+	rRange.value = "500";
+	rRange.id = response.id + "-range";
+	
+	var vBtn = document.createElement("button");
+	vBtn.className = "btn btn-success btn-sm fa fa-thumbs-up float-right";
+	vBtn.style.marginTop = "-10px";
+	vBtn.style.marginLeft = "5px";
+	vBtn.id = response.id + "-btn";
+	vBtn.dataset.value = "500";
+	vBtn.type = "button";
+	//vBtn.onclick = vote(this.id);
+	vBtn.innerText = " +5%";
+	vBtn.dataset.href = response.permlink;
+	vBtn.dataset.votestate = "false";
+	vBtn.dataset.author = response.author;
+	vBtn.onclick = function() { vote(this.id) };
+	
+	
+
+	var br = document.createElement("br");
+	
+	
+	
+	
+	
+	
+	var div = document.createElement("div");
+	
+	var sTime = document.createElement("span");
+	sTime.className = "badge badge-primary fa fa-clock-o timeago";
+	sTime.title = response.created;
+	sTime.innerText = response.created;
+	
+	var sCash = document.createElement("span");
+	sCash.className = "badge badge-primary fa fa-usd";
+	sCash.style.marginLeft = "5px";
+	sCash.style.marginTop = "5px";
+	sCash.id = response.id + "-cash";
+	sCash.innerText = " ...";
+	//sCash.innerText = " " + response.cash /*response.pending_payout_value.split(' ')[0] */;
+	
+	var aVote = document.createElement("a");
+	aVote.className = "btn btn-primary btn-sm fa fa-chevron-circle-up float-right";
+	aVote.style.marginLeft = "5px";
+	aVote.style.marginTop = "5px";
+	//aVote.href = "javascript:void(0);";	// so you can simple use --> "aVote.onclick = votePanelBtn()";
+	aVote.href = "#";
+	aVote.innerText = " Vote";
+	aVote.id = response.id;
+	aVote.innerText = " Vote";
+	aVote.onclick = function(e) {e.preventDefault(); votePanelBtn(this.id) };
+	
+	
+	
+	var divCol2 = document.createElement("div");
+	divCol2.className = "col-sm-2";
+	
+	var divVotes = document.createElement("div");
+	divVotes.className = "text-center rounded hov";
+	divVotes.style.backgroundColor = "#ddd7f9";
+	
+	var iVoteCount = document.createElement("i");
+	iVoteCount.className = "fa fa-caret-up";
+	
+	var h1Votes = document.createElement("h1");
+	h1Votes.id = response.id + "-resCount";
+	h1Votes.innerText = "...";
+	
+	var vCountSpan = document.createElement("span");
+	vCountSpan.innerText = "Votes";
+	
+	
+	
+	
+	
+	
+	divCol10.appendChild(pImg);
+	divCol10.appendChild(authorLink);
+	divCol10.appendChild(br);
+	divCol10.appendChild(p);
+	
+	
+	
+	
+	divSlider.appendChild(rRange);
+	divSlider.appendChild(vBtn);
+	divCol10.appendChild(divSlider);
+	
+	
+	
+	
+	div.appendChild(sTime);
+	div.appendChild(sCash);
+	div.appendChild(aVote);
+	divCol10.appendChild(div);
+	
+	
+	
+	divVotes.appendChild(iVoteCount);
+	divVotes.appendChild(h1Votes);
+	divVotes.appendChild(vCountSpan);
+	divCol2.appendChild(divVotes);
+	
+	
+	
+	
+	cCard.appendChild(divCol2);
+	cCard.appendChild(divCol10);
+	
+	
+		document.getElementById(arContainerID).appendChild(cCard);
+	
+	timeAgo();
+
+
+}
+	
+
+
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+//(function() {
+
+//window.addEventListener('load', function() {
+    var resForm = document.getElementById('resForm');
+    resForm.addEventListener('submit', function(event) {
+      if (resForm.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+      } else if (resForm.checkValidity() === true) {
+        validRes(); //this code calls the post publishing function only when the form is validated!
+	  }
+      resForm.classList.add('was-validated');
+    }, false);
+//}, false);
+//})();
+
+function validRes() {
+	post_res();
+	return;
+	//process post here: post to blockchain using steem connect v2
+} 
+
+
+
+
+
+
+ 
+function post_res() {
+	
+	
+        event.preventDefault();
+        event.stopPropagation();
+		
+		document.getElementById('res-Body').disabled = true;
+		document.getElementById('accept-terms').disabled = true;
+		document.getElementById('publish-res').disabled = true;
+		
+	var message = document.getElementById('res-Body').value;
+	var tags = post_category;
+
+	
+    var permlink = steem.formatter.commentPermlink(parent_author, parent_permlink);
+	//console.log(parent_author, parent_permlink, activeAccount, permlink, '', message, '');
+	
+	
+	sc2.comment(parent_author, parent_permlink, activeAccount, permlink, '', message, '', function(err, result) {
+	
+		
+		if (err) {
+			nErr = JSON.stringify(err.error_description);
+			
+			document.getElementById('res-Body').disabled = false;
+			document.getElementById('accept-terms').disabled = false;
+			document.getElementById('publish-res').disabled = false;
+					
+			console.log(nErr);
+			
+				if (nErr.indexOf("The comment is archived") > -1)
+					return alert("Post with the same permlink already exists and is archived, please change your permlink.");
+					
+					
+				if (nErr.indexOf("You may only post once every 5") > -1)
+					return alert("You may only post once every five minutes!");
+					
+					
+		
+					return;
+				
+						
+			//throw err;
+			alert('Failure! ' + err);
+			//document.getElementById('closeModal').click();
+			
+		}  else {
+		
+			alert('Success!');
+			document.getElementById('res-Body').value = "";
+			document.getElementById('accept-terms').value = "pq-query";
+			document.getElementById('publish-res').value = "";
+
+			document.getElementById('res-Body').disabled = false;
+			document.getElementById('accept-terms').disabled = false;
+			document.getElementById('publish-res').disabled = false;
+				
+			window.location.reload();
+			
+		}
+		
+	
+	});
+	
+	
+	
+}
+
+
+
+
+
+
+
+$("#showContributeForm").click(function(){
+
+	if (readCookie("SC2A") == null) return alert("Login required.")
+
+    $("#contributeDiv").slideToggle();
+	if (document.getElementById('showContributeForm').innerText == " Contribute") {
+		
+		document.getElementById('showContributeForm').innerText = " Close";
+		document.getElementById('showContributeForm').className = "btn btn-secondary fa fa-ban";
+	} else {
+		document.getElementById('showContributeForm').innerText = " Contribute";
+		document.getElementById('showContributeForm').className = "btn btn-primary fa fa-comment";
+	}
+});
+
+
+
+
+$("#resteemBtn").click(function(e){
+	e.preventDefault();
+	
+	if (readCookie("SC2A") == null) return alert("Login required.");
+
+	
+sc2.reblog(account, this.dataset.author, this.dataset.href, function (err, rRes) {
+  //console.log(err, rRes);
+  if (err) {
+	
+	nErr = JSON.stringify(err.error_description);
+	
+	if (nErr.indexOf("Account has already re-blogged this post") > -1) {
+			//console.log("Already re-blogged");
+			document.getElementById('resteemBtn').className = "btn btn-warning fa fa-share disabled"; };
+		} else {
+		//console.log(err.error_discription);
+	}
+	
+	document.getElementById('resteemBtn').className = "btn btn-warning fa fa-share disabled";
+	
+});
+
+});
+
+	
+	
+function checkResponseVotes(response, netVotes) {
+	
+steem.api.getActiveVotes(response.author, response.permlink, function(err, activeVotes) {
+	
+	//console.log(activeVotes);
+	//console.log(err, "actives votes returned are: \n" + JSON.stringify(activeVotes));
+	
+	if (netVotes > 0) { 
+		document.getElementById(response.id + "-resCount").innerText = " +" + countVotes(activeVotes);
+	} else if (netVotes < 0) {
+		document.getElementById(response.id + "-resCount").innerText = " -" + countVotes(activeVotes);
+	} else if  (netVotes == 0) {
+		document.getElementById(response.id + "-resCount").innerText = " 0";
+	}
+	
+	
+	checkVote(response, activeVotes);
+	
+	/*
+	for (x in activeVotes) {
+	
+		//console.log(err, "actives votes returned are: \n" + JSON.stringify(activeVotes[x]) + "percent is: \n" + activeVotes[x].percent);
+
+	
+		if (activeVotes[x].voter == activeAccount && activeVotes[x].percent > 0) {
+			console.log(activeVotes[x]);
+			document.getElementById(response.id).innerHTML = " Voted at: " + activeVotes[x].percent/100 + "%";
+			document.getElementById(response.id + "-btn").dataset.votestate = "true";
+			document.getElementById(response.id + "-btn").dataset.value = "0";
+			document.getElementById(response.id + "-range").value = activeVotes[x].percent;
+			document.getElementById(response.id + "-btn").className = "btn btn-warning btn-sm fa fa-thumbs-down float-right";
+			document.getElementById(response.id + "-range").disabled = true;
+			document.getElementById(response.id + "-btn").innerHTML = " Unvote";
+		} else {
+			/*
+			//document.getElementById(response.id + "-range").value = "500";
+			//document.getElementById(response.id + "-btn").dataset.votestate = "false";
+			//document.getElementById(response.id + "-btn").dataset.value = "500";
+			//document.getElementById(response.id).innerHTML = " Vote";
+			//document.getElementById(response.id + "-btn").className = "btn btn-success btn-sm fa fa-thumbs-up float-right";
+			//document.getElementById(response.id + "-btn").innerHTML = "+ 5%";
+			
+		}
+	}
+	*/
+	
+	
+});
+
+}
+
+
+
+function checkVote(resp, voteArray) {
+
+	for (x in voteArray) {
+	
+		if (voteArray[x].voter == activeAccount && voteArray[x].percent > 0) {
+			//console.log(voteArray[x]);
+			document.getElementById(resp.id).innerHTML = " Voted at: " + voteArray[x].percent/100 + "%";
+			document.getElementById(resp.id + "-btn").dataset.votestate = "true";
+			document.getElementById(resp.id + "-btn").dataset.value = "0";
+			document.getElementById(resp.id + "-range").value = voteArray[x].percent;
+			document.getElementById(resp.id + "-btn").className = "btn btn-warning btn-sm fa fa-thumbs-down float-right";
+			document.getElementById(resp.id + "-range").disabled = true;
+			document.getElementById(resp.id + "-btn").innerHTML = " Unvote";
+		} else {
+			
+			//document.getElementById(response.id + "-range").value = "500";
+			//document.getElementById(response.id + "-btn").dataset.votestate = "false";
+			//document.getElementById(response.id + "-btn").dataset.value = "500";
+			//document.getElementById(response.id).innerHTML = " Vote";
+			//document.getElementById(response.id + "-btn").className = "btn btn-success btn-sm fa fa-thumbs-up float-right";
+			//document.getElementById(response.id + "-btn").innerHTML = "+ 5%";
+			
+		}
+	}
+
+};
+
+	
+	
+
+
+
+function vote(elID) {
+
+	
+if (document.getElementById(elID).className.indexOf('disabled') == -1 ){		//this code makes sure that the click only works when the button is NOT disabled
+
+vter = account;
+athor = document.getElementById(elID).dataset.author;
+pmlink = document.getElementById(elID).dataset.href;
+//weight = Number(document.getElementById(parseInt(elID) + "-range").value);  // not recommended since it removes -/negative values
+//weight = parseInt(document.getElementById(parseInt(elID) + "-range").value);
+weight = parseInt(document.getElementById(elID).dataset.value);
+	
+//console.log("voter: " + vter + "\n" + "author is: " + athor + "\n" + "permlink is: " + pmlink + "\n" + "weight is: " + weight);
+	
+	cClass = document.getElementById(elID).className;
+	vClass = cClass + " disabled";
+	
+	document.getElementById(elID).className = vClass;  //disable the button while the OP is in progress
+	document.getElementById(parseInt(elID) + "-range").disabled = true;	//disbale the slider once the OP is in progress
+	
+	
+sc2.vote(vter, athor, pmlink, weight, function (err, reslt) {
+  //console.log(err, reslt);
+  if (err) {
+	alert(err + "\n" + "Please try again!")
+	document.getElementById(elID).className = cClass;  //re-enable the btn after OP is done
+	
+  } else {
+	//console.log(reslt)
+	document.getElementById(elID).className = cClass;  //re-enable the btn after OP is done
+	
+	if (reslt.result.operations[0][1].weight > 0) {
+		document.getElementById(elID).dataset.votestate = "true";
+		document.getElementById(elID).className = "btn btn-warning btn-sm fa fa-thumbs-down float-right";
+		document.getElementById(elID).dataset.value = "0";
+		document.getElementById(elID).innerHTML = " Unvote";
+		document.getElementById(parseInt(elID) + "-resCount").innerHTML = " " + (Number(document.getElementById(parseInt(elID) + "-resCount").innerHTML) + 1);
+		//document.getElementById(parseInt(elID) + "-range").disabled = true; //disable the slider after a vote is down
+		console.log("voted successfully");
+	} else /* if (reslt.result.operations[0][1].weight = 0) */ {		// } else if {... does NOT work
+		document.getElementById(elID).dataset.votestate = "false";
+		document.getElementById(elID).dataset.value = "5000";
+		document.getElementById(elID).className = "btn btn-success btn-sm fa fa-thumbs-up float-right";
+		document.getElementById(parseInt(elID) + "-range").disabled = false;	//re-enable the slider when a vote is removed
+		document.getElementById(elID).innerHTML = " +" + document.getElementById(parseInt(elID) + "-range").value/100 + "%";
+		document.getElementById(parseInt(elID) + "-resCount").innerHTML = " " + (Number(document.getElementById(parseInt(elID) + "-resCount").innerHTML) + -1);
+		console.log("vote removed!");
+	}
+  }
+});
+
+
+}
+
+}
+
+
+
+
+function votePanelBtn(eID) {
+	//e.preventDefault();
+	
+	if (readCookie("SC2A") == null) return alert("Login required.");
+	
+slidrDiv = document.getElementById(eID + "-div");
+slidr = document.getElementById(eID + "-range");
+
+//slidrDiv.style.display = "block";
+	
+	$("#" + eID + "-div").slideToggle();
+	
+	//document.getElementById(eID + "-btn").innerHTML = " " + document.getElementById(eID + "-range").value/100 + "%";
+	
+	if (document.getElementById(eID).innerText !== " Close") {
+		document.getElementById(eID).innerText = " Close";
+		document.getElementById(eID).className = "btn btn-warning fa fa-times-circle float-right";
+	} else {
+		document.getElementById(eID).innerText = " Vote";
+		document.getElementById(eID).className = "btn btn-success fa fa-chevron-circle-up float-right";
+	}
+	
+}
+
+;
+
+
+function responsesReady() {
+
+var slidd = document.getElementsByClassName("slider");
+
+//console.log("slidebars are: " + slidd.length);
+
+for (x in slidd) {
+slidd[x].oninput = function() {
+
+	//alert(slidd[x].id);	//not responsive so NOT advised
+	//alert(this.id);		//fully responsive so advised
+
+	activeSlidd = document.getElementById(this.id);
+	activeBtn = document.getElementById(parseInt(this.id) + "-btn");
+	
+	//activeBtn.innerHTML = activeSlidd.value/100 + "%";
+	
+	if (activeBtn.dataset.votestate == 'false') {
+		activeBtn.dataset.value = this.value;
+		activeBtn.innerHTML = " + " + this.value/100 + "%";
+	} else if (activeBtn.dataset.votestate == 'true') {		//no code in this section will work since if the voted state is true, then slider is disabled!
+		//activeBtn.innerHTML = " " + -(this.value/100) + "%";
+		//activeBtn.dataset.value = "0";
+		//activeBtn.innerHTML = " Remove vote";
+	}
+}
+}
+
+}
+
+
+
+
+
+</script>
+	
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /404.html
+Disallow: /me.html
+Disallow: /user.html
+Disallow: /query.html
+Disallow: /public/
+Allow: /public/robots.txt
+Disallow: /.ebextensions/

@@ -1,0 +1,261 @@
+	
+	<a class="btn btn-primary btn-block" style="margin-bottom: 20px" href="#" role="button" id="launchBtn">Create Query</a>
+	
+	<a class="btn btn-info btn-block" style="margin-bottom: 20px" href="https://steemit.com/peerquery/@dzivenu/introducing-peer-query-steem-powered-queries-quiz-polls-contests-gigs-proposals-and-more" target="_blank"role="button" >Release notes</a>
+	
+	<a class="btn btn-success btn-block" style="margin-bottom: 20px" href="https://discord.gg/rz9GwAa" target="_blank" role="button">Join our team!</a>
+
+	<a class="btn btn-warning btn-block" style="margin-bottom: 20px" href="https://steemit.chat/direct/peer.query" target="_blank" role="button">Report a bug</a>
+	
+
+	<div class="modal" tabindex="-1" role="dialog" id="queryModal" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create a new query!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		
+		
+<form class="container" id="needs-validation" novalidate>
+	
+			<div class="form-group">
+				<label for="query-title">Enter title of your query</label>
+				<input type="text" class="form-control" id="query-title" placeholder="How do I get a Steem account?" required>
+				    <div class="invalid-feedback">
+						Please provide a valid title.
+					</div>
+			</div>
+			<div class="form-group">
+				<label for="query-text">Enter your query</label>
+				<textarea class="form-control" id="query-body" rows="3" placeholder="Aside from Steemit.com, is there no other way to get a Steem account?" required></textarea>
+				    <div class="invalid-feedback">
+						Please provide a valid description for your query.
+					</div>
+			</div>
+			
+			<div class="form-row">
+			<div class="form-group col-md-4">
+			<label for="inputState">Choose query type</label>
+				<select id="query-type" class="form-control" required>
+					<option value="question" selected>Query</option>
+					<option value="proposal">Proposal</option>
+					<option value="contest">Contest</option>
+					<option value="gig">Gig</option>
+					<option value="quiz">Quiz</option>
+				</select>
+				    <div class="invalid-feedback">
+						Please provide valid tags for your query.
+					</div>
+				<small class="form-text text-muted">Default category for indexing purposes.</small>
+			</div>
+			<div class="form-group col-md-8">
+				<label for="query-tags">Enter relavant tags to your query</label>
+				<input type="text" class="form-control" id="query-tags" placeholder="Enter upto four tags..." required>
+				    <div class="invalid-feedback">
+						Please provide valid tags for your query.
+					</div>
+				<small class="form-text text-muted">Provide any relevant additional tags.</small>
+			</div>
+			</div>			
+			
+			<div class="form-check">
+				<label class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" id="consentBox" required>
+						<span class="custom-control-indicator"></span>
+						<span class="custom-control-description small"> I understand & consent that my query and any data associated with it will be permanently and publicly published to the Steem Blockchain.</span>
+					</label>
+
+			</div>
+	
+	<button class="btn btn-primary" type="submit" id="publishBtn">Publish Query</button>
+  
+</form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Discard</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script>
+//script to see set the link to login url if not loggedin
+
+	steem.api.setOptions({ url: 'https://api.steemit.com' });
+
+//get the Cookie: SC2 authCookie
+
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+
+
+
+
+
+$( document ).ready(function() {
+
+if (readCookie("SC2A") != null) {
+	document.getElementById('launchBtn').href = "#" ;
+	//document.getElementById('launchBtn').setAttribute('target', '#yes');
+	document.getElementById('launchBtn').dataset.toggle = "modal";
+	document.getElementById('launchBtn').dataset.target = "#queryModal";
+	// data-toggle="modal" data-target="#queryModal"
+} else {
+	document.getElementById('launchBtn').href = authLink;
+}
+
+});
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+//(function() {
+  'use strict';
+
+//window.addEventListener('load', function() {
+    var form = document.getElementById('needs-validation');
+    form.addEventListener('submit', function(event) {
+      if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+      } else if (form.checkValidity() === true) {
+        post(); //this code calls the post publishing function only when the form is validated!
+		event.preventDefault();
+        event.stopPropagation();
+	  }
+      form.classList.add('was-validated');
+	  
+
+    }, false);
+//}, false);
+//})();
+
+
+  
+function post() {
+	
+	
+        event.preventDefault();
+        event.stopPropagation();
+		
+		document.getElementById('publishBtn').disabled = true;
+		document.getElementById('closeModal').disabled = true;
+		document.getElementById('query-title').disabled = true;
+		document.getElementById('query-body').disabled = true;
+		document.getElementById('query-type').disabled = true;
+		document.getElementById('query-tags').disabled = true;
+		document.getElementById('consentBox').disabled = true;
+		
+	var qTitle = document.getElementById('query-title').value;
+	var qBody = document.getElementById('query-body').value;
+	var qAuthor = activeAccount;
+	var qCategory = document.getElementById('query-type').value;
+	var qlink = qTitle.replace(/\W+/g, " ");
+	var qPermlk = qlink.replace(/\s+/g, '-');
+	var qPlink = qPermlk.toLowerCase();
+	var qPermlink = qPlink.replace(/^[^a-z\d]*|[^a-z\d]*$/gi, '');
+	var tagStr = document.getElementById('query-tags').value;
+	var tagStrg = tagStr.toLowerCase();
+	//var tagStrng = tagStrg.replace(/^[^a-z\d]*|[^a-z\d]*$/gi, '');
+	var tagString = tagStrg.replace(/\W+/g, " ");
+	var tags = tagString.split(" ", 3);
+	tags.unshift(qCategory);
+	
+	
+		
+	
+	sc2.comment(
+
+    '', // author, leave blank for new post
+    qCategory, // first tag
+    qAuthor, // username
+    qPermlink, // permlink
+    qTitle, // Title
+    qBody, // Body of post
+    // json metadata (additional tags, app name, etc)
+	
+    { tags: tags, app: 'peerquery' },
+	
+    
+	function (err, result) {
+		
+		if (err) {
+			nErr = JSON.stringify(err.error_description);
+			
+				document.getElementById('publishBtn').disabled = false;
+				document.getElementById('closeModal').disabled = false;
+				document.getElementById('query-title').disabled = false;
+				document.getElementById('query-body').disabled = false;
+				document.getElementById('query-type').disabled = false;
+				document.getElementById('query-tags').disabled = false;
+				document.getElementById('consentBox').disabled = false;
+					
+			console.log(nErr);
+			
+				if (nErr.indexOf("The comment is archived") > -1)
+					return alert("Post with the same permlink already exists and is archived, please change your permlink.");
+					
+					
+				if (nErr.indexOf("You may only post once every 5") > -1)
+					return alert("You may only post once every five minutes!");
+					
+					
+		
+					return;
+				
+						
+			//throw err;
+			alert('Failure! ' + err);
+			//document.getElementById('closeModal').click();
+			
+		}  else {
+		
+			alert('Success!');
+				
+			
+			document.getElementById('query-title').value = "";
+			document.getElementById('query-body').value = "";
+			document.getElementById('query-type').value = "question";
+			document.getElementById('query-tags').value = "";
+
+			
+			document.getElementById('publishBtn').disabled = false;
+			document.getElementById('closeModal').disabled = false;
+			document.getElementById('query-title').disabled = false;
+			document.getElementById('query-body').disabled = false;
+			document.getElementById('query-type').disabled = false;
+			document.getElementById('query-tags').disabled = false;
+			document.getElementById('consentBox').disabled = false;
+				
+			
+			document.getElementById('closeModal').click();
+			
+		}
+		
+	
+	});
+	
+	
+	
+}
+
+
+</script>

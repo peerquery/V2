@@ -1,0 +1,345 @@
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainnavbar">
+        <div class="container">
+		
+	<a	class="navbar-brand" href="/">
+    <img src="/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    
+	<small>(v2)</small>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/questions">Questions<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/proposals">Proposals</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/contests">Contests</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/quizzes">Quizzes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/gigs">Gigs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About</a>
+      </li>
+    </ul>
+    <span class="form-inline my-2 my-lg-0">
+      <input style="display:none" class="form-control mr-sm-2" type="search" placeholder="Search... + enter" aria-label="Search"  id="navSearch" onkeydown = "if (event.keyCode == 13) search()" >
+	  
+	  <div class="dropdown">
+		<a href="#" class="btn btn-outline-success my-2 my-sm-0" id="loginBtn">
+			Login
+		</a>
+    <div class="dropdown-menu" id="ddMenu">
+		<a class="dropdown-item" href="#" id="userProfileHref" onClick="location.reload();">Profile</a>
+		
+		<!--
+		<a class="dropdown-item" href="#" id="userQueriesHref" onClick="location.reload();">Queries</a>
+		<a class="dropdown-item" href="#" id="userAccountHref" onClick="location.reload();">Account</a>
+		-->
+		
+      <div class="dropdown-divider"></div>
+		<a class="dropdown-item" href="#" onClick="logOut();">Log Out</a>
+    </div>
+  </div>
+	  
+	  
+	  
+	  
+    </span>
+  </div>
+</nav>
+</div>
+
+
+
+<script>
+//general authentication system for all pages
+
+	steem.api.setOptions({ url: 'https://api.steemit.com' });
+	
+var cook = false;
+
+if (window.location.href.indexOf("/search/") == -1 && window.location.pathname.indexOf('tags/') == -1 && window.location.pathname.indexOf('@') == -1) {
+	pURL = window.location.protocol + "//" + window.location.hostname + window.location.pathname; // remove the port ":4000" when on a live production
+	//alert(pURL);
+} else if (window.location.pathname.indexOf('tags/') > 0) {
+	pURL = window.location.protocol + "//" + window.location.hostname + "/tags" // remove the port ":4000" when on a live production
+} else if (window.location.href.indexOf('@') > 0) {
+	pURL = window.location.protocol + "//" + window.location.hostname + "/me" // remove the port ":4000" when on a live production
+} else {
+	pURL = window.location.protocol + "//" + window.location.hostname + "/search" // remove the port ":4000" when on a live production
+} 
+
+let activeUser;
+
+sc2.init({
+  
+  //baseURL: 'https://v2.steemconnect.com',
+  app: 'peerquery.app',
+  callbackURL: pURL,
+  accessToken: '',
+  scope: ['vote', 'comment', 'custom_json']
+  
+});
+  
+  let isAuth;
+  let state = "";
+  var authLink = sc2.getLoginURL(state);
+  let account;
+  //console.log(link);
+
+
+function authState() {
+	
+if (location.search != "" && location.pathname != "/search") { // parse URI only when the query string is NOT empty OR page is NOT the search page
+	var urlParams;
+	(window.onpopstate = function () {
+		var match,
+			pl     = /\+/g,  // Regex for replacing addition symbol with a space
+			search = /([^&=]+)=?([^&]*)/g,
+			decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+			query  = window.location.search.substring(1);
+
+			urlParams = {};
+		while (match = search.exec(query))
+			urlParams[decode(match[1])] = decode(match[2]);
+	})();
+}
+	
+	
+	
+	
+	
+//get the Cookie: SC2A
+
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+
+if (readCookie("SC2A") != null) cook = true;
+
+	
+	
+function checkCookie() {	
+	
+if (cook == false && urlParams == "") {
+	//console.log("logged out!");
+	isAuth = false; // return false;
+} else if (cook != false && urlParams == "") {
+	//console.log("already logged in");
+	isAuth = true;  //return true;
+		getAuth();
+} else if (cook != false && urlParams != "") {
+	//console.log("Just logged in");
+	isAuth = true;  //return true;
+		getAuth();
+			if(location.hash != undefined && location.hash != null && location.hash != "") {
+		history.replaceState(null, null, location.pathname + location.hash);
+			} else {
+	history.replaceState(null, null, location.pathname);
+		}
+}	else if (cook == false && urlParams != undefined) {
+	//console.log("logging you in");
+	isAuth = true;  //return true;
+		if(setAuth()) {
+	//console.log("completed!");
+			if(location.hash != undefined && location.hash != null && location.hash != "") {
+		history.replaceState(null, null, location.pathname + location.hash);
+			} else {
+	history.replaceState(null, null, location.pathname);
+			}
+		};
+}
+	
+}
+	
+checkCookie();	
+	
+	
+	
+function setCookie(nom, str, sec) {
+    var d = new Date();
+    d.setTime(d.getTime() + (sec*1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = nom + "=" + str + " ; " + expires;
+    if(readCookie("SC2A") != null)
+        return true;
+}
+
+
+function getAuth() {
+
+    if(readCookie("SC2A") != null) {
+		
+		//var authString = document.cookie.substring(15);
+		
+		//if (authString.indexOf(';') > -1) authString = authString.substr(0, authString.indexOf(';'));
+	
+        var authInfo = readCookie("SC2A");
+        authInfo = window.atob(authInfo);
+        authInfo = JSON.parse(authInfo);
+		
+		accessToken = authInfo.access_token;
+		sc2.setAccessToken(accessToken);
+		//expiresIn = authInfo.expires_in;
+		account = authInfo.username;
+		
+		activeAccount = authInfo.username;
+		//document.getElementById("name").innerText = account;
+		
+		isAuth = true;
+		//console.log("logged in");
+		
+        
+		return true;
+	
+	} else {
+
+		isAuth = false;
+		//console.log("logged out");
+		return false;
+	
+	}
+}
+
+
+function setAuth() {
+	
+    var authObject = {access_token : urlParams.access_token, username : urlParams.username};
+    var authString = JSON.stringify(authObject);
+    authString = window.btoa(authString);	//only to obstruct the auth token from literal rendering - hackers please keep your hands off!!!
+	var cookieName = "SC2A";
+    
+    if(setCookie(cookieName, authString, urlParams.expires_in)) {
+		
+		//function to hide the login query string OR redirect to hide query string
+		if(getAuth()) {
+			return true;
+		};
+	}
+	
+}  
+  	
+
+
+}
+
+authState(); //let auth = authState();	//let authState = getAuth();
+
+
+  
+function logOut() {
+      sc2.revokeToken(function (err, result) {
+        //console.log('You successfully logged out', err, result);
+      });
+	
+	//deleteCookie(); //delete cookie to remove old token
+	
+	if (deleteCookie()) {
+		if (window.location.pathname == "/me") {
+			window.location.href = "/";
+		} else {
+			location.reload();
+		}
+	};
+};
+
+  
+
+function deleteCookie() {
+	//console.log("current cookie is: " + document.cookie.substring(15));
+	
+    var exp= 1;
+    
+    var d = new Date();
+    d.setTime(d.getTime() - (exp*24*60*60*1000));
+    var expT = "expires="+d.toUTCString();
+    document.cookie = "SC2A" + "=" + ";" + expT + "; path=/;";
+	//console.log("done");
+	//console.log(document.cookie);
+	
+	return true;
+}
+  
+  
+  
+  
+$(document).ready(function(){
+
+  
+if (isAuth == true) {
+	
+	document.getElementById('loginBtn').href = "#";
+
+    document.getElementById("loginBtn").innerHTML = "@" + account;
+    document.getElementById("loginBtn").className = "btn btn-primary dropdown-toggle dropdown-toggle-split";
+    document.getElementById("loginBtn").dataset.toggle = "dropdown";
+	
+	
+    document.getElementById("userProfileHref").href = "/@" + account + "#about";
+    //document.getElementById("userQueriesHref").href = "/@" + account + "#recentQueries";
+    //document.getElementById("userAccountHref").href = "/@" + account + "#steemAccount";
+
+} else {
+
+    document.getElementById("loginBtn").innerHTML = "Log in";
+    document.getElementById("loginBtn").className = "btn btn-outline-success my-2 my-sm-0";
+    document.getElementById("ddMenu").style.display = "none";
+	document.getElementById('loginBtn').href = authLink;
+
+}
+
+
+
+
+if (window.location.href.indexOf("/search") > -1) {
+	initSearch();
+	document.getElementById('navSearch').style.display = "none";
+	
+}
+
+ 
+});
+
+
+function search() {
+	
+	query = document.getElementById('navSearch').value;
+	searchQuery = query.replace(/ /g, '+');
+	location.href = "/search/" + searchQuery;
+
+}
+
+
+console.log('%cSTOP! PROCEED WITH CAUTION!', 'color: red; font-size: 30px; font-weight: bold;');
+console.log('%cThis is the developer console!!!', 'color: red; font-size: 20px; font-weight: bold;');
+console.log('%cANY ACTIVITY HERE COULD POTENTIALLY COMPROMISE YOUR ACCOUNT!!!', 'color: red; font-size: 20px; font-weight: bold;');
+
+
+
+
+
+//register new user
+
+
+
+</script>
+

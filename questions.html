@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="Peer Query: find or ask the million dollar question that broke the Internet and be rewarded with Steem.">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Peer Query">
+	<meta property="og:title" content="Trending questions: Peer Query">
+	<meta property="og:description" content="Peer Query: find or ask the million dollar question that broke the Internet and be rewarded with Steem.">
+	<meta property="og:image" content="https://www.peerquery.com/images/peerquery.png">
+	<meta property="fb:app_id" content="384491628645652">
+	<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+	<meta name="application-name" content="Peer Query">
+	<title>Trending questions: Peer Query</title>
+	
+	
+	
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="/assets/styles.css">
+	
+	<script src="/assets/timeago.js"></script>
+	
+    <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
+	
+	<script src="https://steemit.github.io/sc2-angular/sc2.min.js"></script>
+	
+
+  
+
+  </head>
+
+  <body>
+  
+  
+  	<div id="navbar"></div>
+	
+
+    
+  <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-3">Questions</h1>
+    <p class="lead">Ask or answer the million-dollar question that broke the internet!</p>
+  </div>
+</div>
+
+  
+  
+    <div class="container" style="margin-top: 50px">
+  <div class="row">
+    <div class="col-sm-9" id="container">
+	
+	
+    
+  
+<nav>
+	<div class="nav nav-tabs justify-content-end" id="nav-tab" role="tablist">
+		<a class="nav-item nav-link active" id="trending" data-toggle="tab" onClick="display(this)" href="#nav-trending" role="tab" aria-controls="nav-trending" aria-selected="true">Trending</a>
+		<a class="nav-item nav-link" id="hot" data-toggle="tab" onClick="display(this)" href="#nav-hot" role="tab" aria-controls="nav-hot" aria-selected="false">Hot</a>
+		<a class="nav-item nav-link" id="new" data-toggle="tab" onClick="display(this)" href="#nav-new" role="tab" aria-controls="nav-new" aria-selected="false">New</a>
+		<a class="nav-item nav-link" id="byvotes" data-toggle="tab" onClick="display(this)" href="#nav-byvotes" role="tab" aria-controls="nav-byvotes" aria-selected="false">Most Votes</a>
+		<a class="nav-item nav-link" id="byresponses" data-toggle="tab" onClick="display(this)" href="#nav-byresponses" role="tab" aria-controls="nav-byresponses" aria-selected="false">Most Responses</a>
+	</div>
+</nav>
+
+
+
+  
+  <div class="tab-content">
+  
+
+<div class="tab-content" id="nav-tabContent">
+	
+	<div class="tab-pane fade show active" id="nav-trending" role="tabpanel" aria-labelledby="trending">
+		
+		<div id="trendingTabContainer"> </div>
+		
+		<div class="loader" id="trendingTabspinner" style="display:none; margin-top:1rem"></div>
+	
+		<button type="button" class="btn btn-outline-info float-right" id="more-trending" name="trending" data-tag="question" data-href="" onClick="loadMore(this)" style="display:none; margin-top: 20px">Load more results</button>
+		
+		
+	</div>
+	
+	
+	
+	
+	<div class="tab-pane fade" id="nav-hot" role="tabpanel" aria-labelledby="hot">
+		
+		<div id="hotTabContainer"> </div>
+		
+		<div class="loader" id="hotTabspinner" style="display:none; margin-top:1rem"></div>
+	
+		<button type="button" class="btn btn-outline-info float-right" id="more-hot" name="hot" data-tag="question" data-href="" onClick="loadMore(this)" style="display:none; margin-top: 20px">Load more results</button>
+		
+		
+	</div>
+	
+	
+	
+	
+	<div class="tab-pane fade" id="nav-new" role="tabpanel" aria-labelledby="new">
+		
+	
+		<div id="newTabContainer"> </div>
+		
+		<div class="loader" id="newTabspinner" style="display:none; margin-top:1rem"></div>
+	
+		<button type="button" class="btn btn-outline-info float-right" id="more-new" name="new" data-tag="question" data-href="" onClick="loadMore(this)" style="display:none; margin-top: 20px">Load more results</button>
+
+	
+	</div>
+	
+	
+	
+	
+	<div class="tab-pane fade" id="nav-byvotes" role="tabpanel" aria-labelledby="byvotes">
+		
+	
+		<div id="byvotesTabContainer"> </div>
+		
+		<div class="loader" id="byvotesTabspinner" style="display:none; margin-top:1rem"></div>
+	
+		<button type="button" class="btn btn-outline-info float-right" id="more-byvotes" name="byvotes" data-tag="question" data-href="" onClick="loadMore(this)" style="display:none; margin-top: 20px">Load more results</button>
+
+	
+	</div>
+	
+	
+	
+	
+	
+	<div class="tab-pane fade" id="nav-byresponses" role="tabpanel" aria-labelledby="byresponses">
+		
+	
+		<div id="byresponsesTabContainer"> </div>
+		
+		<div class="loader" id="byresponsesTabspinner" style="display:none; margin-top:1rem"></div>
+	
+		<button type="button" class="btn btn-outline-info float-right" id="more-byresponses" name="byresponses" data-tag="question" data-href="" onClick="loadMore(this)" style="display:none; margin-top: 20px">Load more results</button>
+
+	
+	</div>
+	
+	
+	
+	
+</div>
+  
+  
+   
+   </div>
+   
+	
+
+	
+	
+  
+    </div>
+	
+
+  	
+    <div class="col-sm-3">
+
+	  	<div id="sidebar"></div>
+	
+    </div>
+	
+  </div>
+</div>
+
+
+	<div id="footer" style="margin-top: 50px"></div>
+
+
+	
+	
+	
+<script>
+//first load the navbar, sidebar and footer!
+	 $("#navbar").load("/navbar.html");
+     $("#sidebar").load("/sidebar.html");
+     $("#footer").load("/footer.html");
+	 
+	 
+	 
+	 steem.api.setOptions({ url: 'https://api.steemit.com' });
+
+
+
+
+function display(element) {
+	
+	document.getElementById(element.id + "TabContainer").innerHTML = "";
+	document.getElementById(element.id + "Tabspinner").style.display = "block";
+	
+	document.getElementById("more-" + element.id).dataset.href = "";
+	
+	loadMore(document.getElementById("more-" + element.id));
+	
+	
+}
+
+display(document.getElementById("trending"));
+
+
+
+function loadMore(element) {
+	
+	document.getElementById(element.name + "Tabspinner").style.display = "block";
+	
+	
+	var limt = 11;
+	
+	var last_permlink = element.dataset.href;
+	var last_author = element.dataset.author;
+	
+	
+		if (element.dataset.href == "") {
+			query = { tag: element.dataset.tag, limit: limt };
+		} else {
+			query = { tag: element.dataset.tag, limit: limt, start_author : last_author, start_permlink : last_permlink };
+		}
+		
+		
+		if (element.name == "trending") getByTrending(query, element);
+		if (element.name == "hot") getByHot(query, element);
+		if (element.name == "new") getByCreated(query, element);
+		if (element.name == "byvotes") getByVotes(query, element);
+		if (element.name == "byresponses") getByChildren(query, element);
+	
+	
+}
+
+
+
+function getByTrending(query, element) {
+	
+    steem.api.getDiscussionsByTrending(query, function(err, result) {
+		
+		console.log(err, result);
+		document.getElementById(element.name + "Tabspinner").style.display = "none";
+
+		if (result.length <= 1) return;
+		
+		document.getElementById("more-" + element.name).style.display = "block";
+		
+		
+		var n = result.length -1;
+		
+		console.log(n);
+		
+		element.dataset.href = result[n].permlink;
+		element.dataset.author = result[n].author;
+		
+		
+		for (x in result) {
+			
+			if (x == result.length - 1) { timeAgo(); return }; //ignore the last result
+			
+			show_post(result[x], element.name);
+			
+		}
+		
+		
+    });
+	
+}
+	
+	
+
+
+
+function getByHot(query, element) {
+	
+    steem.api.getDiscussionsByHot(query, function(err, result) {
+		
+		console.log(err, result);
+		document.getElementById(element.name + "Tabspinner").style.display = "none";
+
+		if (result.length <= 1) return;
+		
+		document.getElementById("more-" + element.name).style.display = "block";
+				
+		
+		var n = result.length -1;
+		
+		console.log(n);
+		
+		element.dataset.href = result[n].permlink;
+		element.dataset.author = result[n].author;
+		
+		
+		for (x in result) {
+			
+			if (x == result.length - 1) { timeAgo(); return }; //ignore the last result
+			
+			show_post(result[x], element.name);
+			
+		}
+		
+		
+    });
+	
+}
+	
+	
+
+
+
+function getByCreated(query, element) {
+	
+    steem.api.getDiscussionsByCreated(query, function(err, result) {
+		
+		console.log(err, result);
+		document.getElementById(element.name + "Tabspinner").style.display = "none";
+
+		if (result.length <= 1) return;
+		
+		document.getElementById("more-" + element.name).style.display = "block";
+				
+		
+		var n = result.length -1;
+		
+		console.log(n);
+		
+		element.dataset.href = result[n].permlink;
+		element.dataset.author = result[n].author;
+		
+		
+		for (x in result) {
+			
+			if (x == result.length - 1) { timeAgo(); return }; //ignore the last result
+			
+			show_post(result[x], element.name);
+			
+		}
+		
+		
+    });
+	
+}
+	
+	
+
+
+
+function getByVotes(query, element) {
+	
+    steem.api.getDiscussionsByVotes(query, function(err, result) {
+		
+		console.log(err, result);
+		document.getElementById(element.name + "Tabspinner").style.display = "none";
+
+		if (result.length <= 1) return;
+		
+		document.getElementById("more-" + element.name).style.display = "block";
+				
+		
+		var n = result.length -1;
+		
+		console.log(n);
+		
+		element.dataset.href = result[n].permlink;
+		element.dataset.author = result[n].author;
+		
+		
+		for (x in result) {
+			
+			if (x == result.length - 1) { timeAgo(); return }; //ignore the last result
+			
+			show_post(result[x], element.name);
+			
+		}
+		
+		
+    });
+	
+}
+	
+	
+
+
+
+function getByChildren(query, element) {
+	
+    steem.api.getDiscussionsByChildren(query, function(err, result) {
+		
+		console.log(err, result);
+		document.getElementById(element.name + "Tabspinner").style.display = "none";
+
+		if (result.length <= 1) return;
+		
+		document.getElementById("more-" + element.name).style.display = "block";
+				
+		
+		var n = result.length -1;
+		
+		console.log(n);
+		
+		element.dataset.href = result[n].permlink;
+		element.dataset.author = result[n].author;
+		
+		
+		for (x in result) {
+			
+			if (x == result.length - 1) { timeAgo(); return }; //ignore the last result
+			
+			show_post(result[x], element.name);
+			
+		}
+		
+		
+    });
+	
+}
+	
+	
+function show_post(response, name) {
+	
+	
+	var qCard = document.createElement("div");
+	qCard.className = "row align-items-center qcard rounded";
+	qCard.style.marginTop = "20px";
+	
+	var divCol9 = document.createElement("div");
+	divCol9.className = "col-sm-9";
+	
+	var pImg = document.createElement("img");
+	pImg.className = "rounded-circle in-line";
+	pImg.onerror = function() {this.src='/images/avatar.png'};
+	pImg.style.height = "30px";
+	pImg.src = "https://img.busy.org/@" + response.author;
+	pImg.alt = response.author;
+	
+	var authorLink = document.createElement("a");
+	authorLink.className = "badge badge-pill badge-info";
+	authorLink.href = "/@" + response.author;
+	authorLink.style.marginLeft = "5px";
+	authorLink.innerHTML = " @" + response.author + "(" + steem.formatter.reputation(response.author_reputation) + ")";
+	
+	var br = document.createElement("br");
+	
+	var aTitle = document.createElement("a");
+	aTitle.className = "lead";
+	aTitle.href = "/" + response.category + "/@" + response.author + "/" + response.permlink;
+	aTitle.style.fontSize = "1.5rem";
+	aTitle.style.marginLeft = "5px";
+	aTitle.innerHTML = response.title;
+	
+	var div = document.createElement("div");
+	
+	var spanTime = document.createElement("span");
+	spanTime.className = "badge badge-primary fa fa-clock-o timeago";
+	spanTime.title = response.created;
+	spanTime.innerText = response.created;
+	
+	var spanCash = document.createElement("span");
+	spanCash.className = "badge badge-primary fa fa-usd";
+	spanCash.style.marginLeft = "5px";
+	spanCash.style.marginTop = "5px";
+	spanCash.innerText = " " + response.pending_payout_value.split(' ')[0];
+	
+	var categoryLink = document.createElement("a");
+	categoryLink.className = "badge badge-primary fa fa-tag";
+	categoryLink.style.marginLeft = "5px";
+	categoryLink.style.marginTop = "5px";
+	//categoryLink.href = "/tags/" + response.category;
+	categoryLink.href = "javascript:void(0)";
+	categoryLink.innerText = " " + response.category;
+	
+	
+	divCol9.appendChild(pImg);
+	divCol9.appendChild(authorLink);
+	divCol9.appendChild(br);
+	divCol9.appendChild(aTitle);
+	
+	div.appendChild(spanTime);
+	div.appendChild(spanCash);
+	div.appendChild(categoryLink);
+	divCol9.appendChild(div);
+	
+	
+	
+	
+	
+	var divCol3 = document.createElement("div");
+	divCol3.className = "col-sm-3";
+	
+	var divRow = document.createElement("div");
+	divRow.className = "row justify-content-center";
+	divRow.style.marginTop = "5px";
+	
+	var divCol5One = document.createElement("div");
+	divCol5One.className = "col-5 text-center rounded hov";
+	divCol5One.style.backgroundColor = "#a7f7f9";
+	
+	var iVotes = document.createElement("i");
+	iVotes.className = "fa fa-caret-up";
+	iVotes.dataset.ariaHidden = "true";
+	
+	var h1Votes = document.createElement("h1");
+	h1Votes.innerText =  " " + response.net_votes;
+	
+	var spanVotes = document.createElement("span");
+	spanVotes.innerText = "Votes";
+	
+	
+	var divCol5Two = document.createElement("div");
+	divCol5Two.className = "col-5 text-center rounded hov";
+	divCol5Two.style.marginLeft = "2vw";
+	divCol5Two.style.backgroundColor = "#ddd7f9";
+	
+	var iAnswers = document.createElement("i");
+	iAnswers.className = "fa fa-comments-o";
+	iAnswers.dataset.ariaHidden = "true";
+	
+	var h1Answers = document.createElement("h1");
+	h1Answers.innerText = " " + response.children;
+	
+	var spanAnswers = document.createElement("span");
+	spanAnswers.innerText = "Answers";
+	
+	
+	
+	
+	divCol5One.appendChild(iVotes);
+	divCol5One.appendChild(h1Votes);
+	divCol5One.appendChild(spanVotes);
+	
+	divRow.appendChild(divCol5One);
+	
+	
+	
+	
+	divCol5Two.appendChild(iAnswers);
+	divCol5Two.appendChild(h1Answers);
+	divCol5Two.appendChild(spanAnswers);
+	
+	divRow.appendChild(divCol5Two);
+	
+	
+	divCol3.appendChild(divRow);
+	
+	
+	
+	
+	qCard.appendChild(divCol9);
+	qCard.appendChild(divCol3);
+	
+	
+	document.getElementById(name + "TabContainer").appendChild(qCard);
+	
+	
+}
+
+
+
+
+</script>
+	
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+</html>

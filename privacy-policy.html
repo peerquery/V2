@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="Read our awesome Privacy policy.">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Peer Query">
+	<meta property="og:title" content="Privacy policy: Peer Query">
+	<meta property="og:description" content="Read our awesome Privacy policy.">
+	<meta property="og:image" content="https://www.peerquery.com/images/peerquery.png">
+	<meta property="fb:app_id" content="384491628645652">
+	<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+	<meta name="application-name" content="Peer Query">
+	<title>Privacy policy: Peer Query</title>
+
+	
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="assets/styles.css">
+	
+    <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
+	
+	<script src="https://steemit.github.io/sc2-angular/sc2.min.js"></script>
+	
+	<script src="/assets/timeago.js"></script>
+	
+	
+	
+
+  
+
+  </head>
+
+  <body>
+  
+  
+  	<div id="navbar"></div>
+	
+
+    
+  <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-3">Privacy policy</h1>
+    <p class="lead">All information we posses already exist on the Steem Blockchain.</p>
+  </div>
+</div>
+
+  
+  
+    <div class="container" style="margin-top: 50px">
+  <div class="row">
+    <div class="col-sm-9" id="container">
+	
+
+	
+	
+<div class="card border-dark mb-3">
+	<div class="card-header">
+		<div class="card-text">
+
+		<h1 class="display-4">Does Peer Query store or track sensitive user information?</h1>
+		<hr/>
+		<p class="lead">All information stored through the use of our site already exist on the Blockchain. However, scanning the entire Blockchain everytime a user opens any page on Peer Query can be tidious, hence we only index some of the activities related to Peer Query so as to make easier to identify and access.</p>
+		<p class="lead">To make this indexing process efficient, we use a Database solution to index the following information about each new query created on Peer Query: author, permlink and time.</p>
+		<p class="lead">To be able to maintain an account of our users, we also register a list of all accounts that use our site. This information is what you see on our <a href="/users">users page</a>.</p>
+		<p class="lead"><b>No keys, or passwords are required to use our site</b> as login is processed by <a href="https://v2.steemconnect.com">Steem Connect v2</a>.</p>
+		</p>
+		</div>
+	</div>
+</div>
+	
+<div class="card border-dark mb-3">
+	<div class="card-header">
+		<div class="card-text">
+
+		<h1 class="display-4">What about cookies?</h1>
+		<hr/>
+		<p class="lead">Peer Query uses cookies to store information related to user sessions; nothing more.
+		</p>
+		</div>
+	</div>
+</div>
+
+	
+
+</div>
+	
+
+  	
+    <div class="col-sm-3">
+
+	  	<div id="sidebar"></div>
+	
+    </div>
+	
+  </div>
+</div>
+
+
+	<div id="footer" style="margin-top: 50px"></div>
+
+
+	
+	
+	
+<script>
+//first load the navbar, sidebar and footer!
+	 $("#navbar").load("navbar.html");
+     $("#sidebar").load("sidebar.html");
+     $("#footer").load("footer.html");
+	 
+	 
+//next get the active tab first before any other thing!
+	 
+
+if (window.location.hash == "" || window.location.hash == "#newQueries") {
+
+    document.getElementById("newQueries").className = "nav-item nav-link active";
+    document.getElementById("newQueriesTab").className = "tab-pane fade show active";
+	activeTab = document.getElementById("newQueriesTab");
+	
+} else if (window.location.hash != "" && window.location.hash == "#topQueries") {
+
+    document.getElementById("topQueries").className = "nav-item nav-link active";
+    document.getElementById("topQueriesTab").className = "tab-pane fade show active";
+	activeTab = document.getElementById("topQueriesTab");
+	
+} else if (window.location.hash != "" && window.location.hash == "#allQueries") {
+
+    document.getElementById("allQueries").className = "nav-item nav-link active";
+    document.getElementById("allQueriesTab").className = "tab-pane fade show active";
+	activeTab = document.getElementById("allQueriesTab");
+	
+}
+
+//alert(activeTab.id);
+
+
+
+function showUsers(containerID) {
+	var containerID = containerID;
+	
+	var divColMain = document.createElement("div");
+	divColMain.className = "card-columns";
+	divColMain.innerHTML = "";
+	
+	var divCard = document.createElement("div");
+	divCard.className = "card";
+	divCard.style.width = "16rem";
+	divCard.innerHTML = "";
+	
+	var profileImg = document.createElement("img");
+	profileImg.className = "card-img-top";
+	profileImg.src = "images/pic.jpg";
+	profileImg.alt = "thumnail";
+	
+	var divCardBody = document.createElement("div");
+	divCardBody.className = "card-body";
+	divCardBody.innerHTML = "";
+	
+	var h4 = document.createElement("h4");
+	h4.className = "card-title text-center";
+	h4.style.fontSize = "0.9rem";
+	h4.innerHTML = "@BlockRush";
+	
+	var ulQueries = document.createElement("ul");
+	ulQueries.className = "list-group list-group-flush text-center";
+	ulQueries.innerHTML = "";
+	
+	var liQueries = document.createElement("li");
+	liQueries.className = "list-group-item";
+	liQueries.innerHTML = "<b>" + "11 queries" + "</b>";
+	
+	var pLastQuery = document.createElement("p");
+	pLastQuery.className = "card-text text-center";
+	pLastQuery.innerHTML = "";
+	
+	var sLastQuery = document.createElement("small");
+	sLastQuery.className = "text-muted fa fa-tasks";
+	sLastQuery.title = "";
+	sLastQuery.innerHTML = "10 hours ago";
+	
+	var aLink = document.createElement("a");
+	aLink.className = "btn btn-primary btn-block";
+	aLink.href = "https://veiw.com";
+	aLink.innerHTML = "View";
+	
+	var divCardFooter = document.createElement("div");
+	divCardFooter.className = "card-footer text-center";
+	divCardFooter.innerHTML = "";
+	
+	var sCardFooter = document.createElement("small");
+	sCardFooter.className = "timeago";
+	sCardFooter.innerHTML = "Joined: " + "<span class='timeago'> " + "3 mins ago</span></small>";
+	
+	
+	
+	divCardBody.appendChild(h4);
+		ulQueries.appendChild(liQueries);
+	divCardBody.appendChild(ulQueries);
+		pLastQuery.appendChild(sLastQuery);
+	divCardBody.appendChild(pLastQuery);
+	divCardBody.appendChild(aLink);
+	
+	divCardFooter.appendChild(sCardFooter);
+	
+	
+	divCard.appendChild(profileImg);
+	divCard.appendChild(divCardBody);
+	divCard.appendChild(divCardFooter);
+	
+	divColMain.appendChild(divCard);
+	
+	document.getElementById(containerID).appendChild(divColMain);
+	//document.getElementById(activeTab.id).appendChild(divColMain);
+
+}
+
+
+
+</script>
+	
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+</html>

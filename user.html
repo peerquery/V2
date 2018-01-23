@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="User.">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Peer Query">
+	<meta property="og:title" content="Account: Peer Query">
+	<meta property="og:description" content="User.">
+	<meta property="og:image" content="https://www.peerquery.com/images/peerquery.png">
+	<meta property="fb:app_id" content="384491628645652">
+	<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+	<meta name="application-name" content="Peer Query">
+	<title>Account: Peer Query</title>
+	
+	
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="/assets/styles.css">
+	
+    <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
+	
+	<script src="https://steemit.github.io/sc2-angular/sc2.min.js"></script>
+	
+	<script src="/assets/timeago.js"></script>
+	
+	
+
+  
+
+  </head>
+
+  <body>
+  
+  
+  	<div id="navbar"></div>
+	
+
+    
+  <div class="jumbotron jumbotron-fluid" style="background-image:url(''); background-repeat: no-repeat; background-size: 100% 100%; margin-bottom:5rem;" id="coverImg">
+  <div class="container" style="height: 140px; width:100%">
+  
+<div class="row align-items-end">
+    <div class="col-sm-2" style="margin-top:5rem">
+		<img src="/images/avatar.png" onerror="this.src='/images/avatar.png'" alt="avatar" class="img-thumbnail" id="userImg" style="height:10rem; width:10rem;">
+		<br/>
+		<br/>
+	<a href="#" id="userAccount" class="lead"></a>
+    </div>
+	
+	
+    <div class="col-sm-10">
+    </div>
+</div>
+  
+
+  </div>
+</div>
+
+
+  <div class="container" style="margin-top: 0px">
+  <div class="row">
+    <div class="col-sm-9" id="container">
+		
+	
+<nav>
+	<div class="nav nav-tabs justify-content-end" id="nav-tab" role="tablist">
+		<a class="nav-item nav-link active" id="nav-account-tab" data-toggle="tab" href="#nav-account" role="tab" aria-controls="nav-account" aria-selected="true">Account</a>
+	</div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+
+
+<div id="nav-account" class="tab-pane fade show active" role="tabpanel" >
+
+<br/>
+
+	<div class="loader" id="loader"></div>
+
+	
+	
+
+<div class="" style="display:none" id="steemInfo">
+
+	
+	<div class="card border-light mb-3">
+  <div class="card-header">Voting Power</div>
+  
+  <div class="card-body">
+    
+  <div class="progress">
+  <div class="progress-bar progress-bar-striped" id="VP" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">  </div>
+  </div>
+  
+  </div>
+</div>
+
+
+
+
+	
+<div class="card border-light mb-3">
+  <div class="card-header">About</div>
+  
+  <table class="table table-bordered">
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Joined</th>
+      <td id="created"></td>
+    </tr>
+    <tr>
+      <th scope="row">ID</th>
+      <td id="id"></td>
+    </tr>
+    <tr>
+      <th scope="row">Account</th>
+      <td id="account"></td>
+    </tr>
+    <tr>
+      <th scope="row">Post count</th>
+      <td id="posts"></td>
+    </tr>
+    <tr>
+      <th scope="row">Reputation</th>
+      <td id="reputation"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+	
+<div class="card border-light mb-3">
+  <div class="card-header">Account wallet</div>
+  
+  <table class="table table-bordered">
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Steem Dollars</th>
+      <td id="sbd"></td>
+    </tr>
+    <tr>
+      <th scope="row">Steem Balance</th>
+      <td id="steemBalance"></td>
+    </tr>
+    <tr>
+      <th scope="row">Account worth</th>
+      <td id="">-</td>
+    </tr>
+    <tr>
+      <th scope="row">Steem Power</th>
+      <td id="">-</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+	
+<div class="card border-light mb-3">
+  <div class="card-header">Account vests</div>
+  
+  <table class="table table-bordered">
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Rewardv Vesting Balance</th>
+      <td id="rewardVB"></td>
+    </tr>
+    <tr>
+      <th scope="row">Reward Vesting Steem</th>
+      <td id="rewardVS"></td>
+    </tr>
+    <tr>
+      <th scope="row">Vesting Shares</th>
+      <td id="Vshares"></td>
+    </tr>
+    <tr>
+      <th scope="row">Delegated Vesting Shares</th>
+      <td id="dvShares"></td>
+    </tr>
+    <tr>
+      <th scope="row">Received Vesting Shares</th>
+      <td id="rvShares"></td>
+    </tr>
+    <tr>
+      <th scope="row">Vesting Balance</th>
+      <td id="vBalance"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+	
+<div class="card border-light mb-3">
+  <div class="card-header">Account bandwith</div>
+  
+  <table class="table table-bordered">
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Average Bandwidth</th>
+      <td id="aBandwidth"></td>
+    </tr>
+    <tr>
+      <th scope="row">Lifetime Bandwidth</th>
+      <td id="lBandwidth"></td>
+    </tr>
+    <tr>
+      <th scope="row">Last bandwidth update</th>
+      <td id="lbUpdate"></td>
+    </tr>
+    <tr>
+      <th scope="row">Average Market Bandwidth</th>
+      <td id="amBandwidth"></td>
+    </tr>
+    <tr>
+      <th scope="row">Last Market Bandwidth</th>
+      <td id="lmBandwidth"></td>
+    </tr>
+	<tr>
+      <th scope="row">Last Market Bandwidth Update</th>
+      <td id="lmbUpdate"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+	
+<div class="card border-light mb-3">
+  <div class="card-header">Public keys</div>
+  
+  <table class="table table-bordered">
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Owner</th>
+      <td id="ownerKey"></td>
+    </tr>
+    <tr>
+      <th scope="row">Active</th>
+      <td id="activeKey"></td>
+    </tr>
+    <tr>
+      <th scope="row">Posting</th>
+      <td id="postingKey"></td>
+    </tr>
+    <tr>
+      <th scope="row">Memo</th>
+      <td id="memoKey"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+  
+  
+	
+</div>
+
+
+
+  	
+    <div class="col-sm-3">
+
+	  	<div id="sidebar"></div>
+	
+    </div>
+	
+  </div>
+</div>
+	
+	
+	<div id="footer" style="margin-top: 50px"></div>
+	
+	
+	
+	
+
+	
+	
+<script>
+//first load the navbar, sidebar and footer!
+	 $("#navbar").load("/navbar.html");
+     $("#sidebar").load("/sidebar.html");
+     $("#footer").load("/footer.html");
+	 
+	steem.api.setOptions({ url: 'https://api.steemit.com' });
+
+let pURL = window.location.pathname;
+let str = pURL.substr(pURL.indexOf("@") + 1);
+let author = str.substring((str.indexOf("@") + 1));
+	//console.log(author);
+	
+	
+	document.title = "@" + author + " - Peer Query";
+	
+	document.getElementById("userAccount").href = "/@" + author;
+	document.getElementById("userAccount").innerText = "@" + author;
+	
+	
+	document.getElementById("userImg").src = "https://img.busy.org/@" + author;
+	document.getElementById("coverImg").style.backgroundImage =  "url('" + "https://img.busy.org/@" + author + "/cover" + "')";
+	
+	
+	 
+//next get the active tab first before any other thing!
+	 
+
+
+function getUserDetails() {
+	document.getElementById("accountName").innerText = "@" + author;
+}
+
+
+
+
+function getAccount() {
+
+
+let reputation;
+let steemBalance;
+let SP;
+let sbd;
+let created;
+let post;
+let VP;
+let about;
+let location;
+let name;
+let website;
+let keys;
+let lastVoteTime;
+let id;
+	
+	url = window.location.pathname;
+	var username = url.substr(url.indexOf("@") + 1);
+	//console.log(username);
+
+	//let account = account;
+    steem.api.getAccounts([username], function(err, response){
+        //console.log(err, response);
+		if (response == "") {
+			document.getElementById("loader").style.display = "none";
+			document.getElementById("err").style.display = "block";
+			return;
+		}
+		
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("steemInfo").style.display = "block";
+		
+		
+		if (response[0].json_metadata) {
+			metaData = JSON.parse(response[0].json_metadata);
+		
+			if (metaData.profile.profile_image) {
+				document.getElementById("userImg").src = metaData.profile.profile_image;
+			}
+		
+			if (metaData.profile.cover_image) {
+			document.getElementById("coverImg").style.backgroundImage = "url('" + metaData.profile.cover_image + "')";
+			}
+		}
+		
+		
+		result = response[0];
+		
+        document.getElementById("id").innerHTML = result.id;
+        document.getElementById("account").innerHTML = result.name;
+        document.getElementById("steemBalance").innerHTML = result.balance;
+        document.getElementById("sbd").innerHTML = result.sbd_balance;
+        document.getElementById("created").innerHTML = result.created;
+        document.getElementById("posts").innerHTML = result.post_count;
+        document.getElementById("VP").innerHTML = result.voting_power;
+		
+		
+		
+        document.getElementById("rewardVB").innerHTML = result.reward_vesting_balance;
+        document.getElementById("rewardVS").innerHTML = result.reward_vesting_steem;
+        document.getElementById("Vshares").innerHTML = result.vesting_shares;
+        document.getElementById("dvShares").innerHTML = result.delegated_vesting_shares;
+        document.getElementById("rvShares").innerHTML = result.received_vesting_shares;
+        document.getElementById("vBalance").innerHTML = result.vesting_balance;
+		
+		
+		
+        document.getElementById("aBandwidth").innerHTML = result.average_bandwidth;
+        document.getElementById("lBandwidth").innerHTML = result.lifetime_bandwidth;
+        document.getElementById("lbUpdate").innerHTML = result.last_bandwidth_update;
+        document.getElementById("amBandwidth").innerHTML = result.average_market_bandwidth;
+        document.getElementById("lmBandwidth").innerHTML = result.lifetime_market_bandwidth;
+        document.getElementById("lmbUpdate").innerHTML = result.last_market_bandwidth_update;
+		
+		
+		
+        VP_number = result.voting_power/100 + "%";
+        document.getElementById("VP").innerHTML = VP_number;
+        document.getElementById("VP").style.width = VP_number;
+		
+		rep = steem.formatter.reputation(result.reputation);
+        document.getElementById("reputation").innerHTML = rep;
+		
+		
+        document.getElementById("ownerKey").innerHTML = result.owner.key_auths;
+        document.getElementById("activeKey").innerHTML = result.active.key_auths;
+        document.getElementById("postingKey").innerHTML = result.posting.key_auths;
+        document.getElementById("memoKey").innerHTML = result.memo_key;
+		
+		
+		
+        //document.getElementById("website").innerHTML = b.json_metadata.profile.name;
+	});
+	
+}
+
+getAccount();
+
+
+
+
+
+</script>
+	
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+</html>

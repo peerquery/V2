@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="Peer Query is a Blockchain powered query platform which where users reward both query makers and contributors with Steem tokens.">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Peer Query">
+	<meta property="og:title" content="Steem Powered Query platform">
+	<meta property="og:description" content="Peer Query is a Blockchain powered query platform which where users reward both query makers and contributors with Steem tokens.">
+	<meta property="og:image" content="https://www.peerquery.com/images/peerquery.png">
+	<meta property="fb:app_id" content="384491628645652">
+	<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+	<meta name="application-name" content="Peer Query">
+	<title>Steem Powered Query platform</title>
+
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="/assets/styles.css">
+	
+    <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
+	
+	<script src="https://steemit.github.io/sc2-angular/sc2.min.js"></script>
+	
+	<script src="/assets/timeago.js"></script>
+	
+	
+
+  
+
+  </head>
+
+  <body>
+  
+  
+  	<div id="navbar"></div>
+	
+
+    
+  <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-3">Peer Query</h1>
+    <p class="lead">Query platform powered by the Steem Blockchain!</p>
+  </div>
+</div>
+
+  
+  
+    <div class="container" style="margin-top: 50px">
+  <div class="row">
+    <div class="col-sm-9" id="container">
+	
+  
+  
+<nav>
+	<div class="nav nav-tabs justify-content-end" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="true">About</a>
+    <a class="nav-item nav-link" id="nav-faqs-tab" data-toggle="tab" href="#nav-faqs" role="tab" aria-controls="nav-faqs" aria-selected="false">FAQs</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+	</div>
+</nav>
+  
+  
+  
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+  
+	<br/>
+  
+<div class="card border-dark mb-3">
+	<div class="card-header">
+		<div class="card-text">
+
+		<h1 class="display-4">Steem powered Query</h1>
+		<hr/>
+		<p class="lead"><a href="https://steem.io">Steem</a> is a Blockchain which allows users to appreciate and reward content.</p>
+		<p class="lead"><a href="/">Peer Query</a> is a query interface/client for Steem Condenser and makes it easier to browse and interact with queries created on Steem.</p>
+		<p class="lead">Handcrafted and maintained by <a href="https://dzivenu.com">Makafui George Dzivenu</a>, founder of the <a href="https://blockrush.info">Blockchain Rush</a>; proudly Ghanaian.</p>
+		
+		<hr/>
+		
+		<p class="lead">Core technologies include: <a href="https://steem.io">Steem</a>, <a href="https://github.com/steemit/steem-js">Steem.js</a>, <a href="https://steemconnect.com">Steem Connect v2</a>,  <a href="https://github.com/busyorg/busy-img"> Busy Img</a> and  <a href="https://steemcsm.com">Steem CMS</a> by the <a href="https://steem.institute">Steem Institute</a>.</p>
+		<p class="lead">Additional technologies include: <a href="https://getbootstrap.com">Bootstrap 4</a>, <a href="https://nodejs.com">Node.js</a>, <a href="https://expressjs.com.com">Express.js</a>,  <a href="https://fontawesome.io"> Font.Awesome</a> and  <a href="https://mysql.com">MySQL</a>. See the source code on <a href="https://github.com">GitHub</a>.
+		</p>
+		
+	</div>
+</div>
+	
+</div>
+  
+  
+  
+  </div>
+  
+  
+  <div class="tab-pane fade" id="nav-faqs" role="tabpanel" aria-labelledby="nav-faqs-tab">
+  
+	<br/>
+	
+<div class="card border-dark mb-3">
+	<div class="card-header">
+		<div class="card-text">
+
+		<h1 class="display-4">What is Peer Query?</h1>
+		<hr/>
+		<p class="lead">Peer Query is a Steem client which allows users to create query types of posts to the Steem Blockchain.
+		</p>
+		</div>
+	</div>
+</div>
+	
+<div class="card border-dark mb-3">
+	<div class="card-header">
+		<div class="card-text">
+
+		<h3 class="display-4">How does Peer Query work?</h3>
+		<hr/>
+		<p class="lead">Create a query on Peer Query and it will be published as a post to the Steem Blockchain. Steemians on all Steem clients can contribute and upvote your query, its as simple as that.
+		</p>
+		</div>
+	</div>
+</div>
+	
+<div class="card border-dark mb-3">
+	<div class="card-header">
+		<div class="card-text">
+
+		<h1 class="display-4">Does Peer Query cost anything to use?</h1>
+		<hr/>
+		<p class="lead">Nope. There is no author reward splitting, no use of your voting power as payment and no direct or indirect charge to using Peer Query.
+		</p>
+		</div>
+	</div>
+</div>
+	
+<div class="card border-dark mb-3">
+	<div class="card-header">
+		<div class="card-text">
+
+		<h1 class="display-4">Who can use Peer Query?</h1>
+		<hr/>
+		<p class="lead">Anyone with a Steem account.
+		</p>
+		</div>
+	</div>
+</div>
+	
+<div class="card border-dark mb-3">
+	<div class="card-header">
+		<div class="card-text">
+
+		<h1 class="display-4">How do I access my earnings on Peer Query?</h1>
+		<hr/>
+		<p class="lead">Simply visit the wallet section of your account on Steemit to redeem your earnings. Currently we do not suport direct re-withdrawals on Peer Query.
+		</p>
+		</div>
+	</div>
+</div>
+	
+<div class="card border-dark mb-3">
+	<div class="card-header">
+		<div class="card-text">
+
+		<h1 class="display-4">Does Peer Query store or track sensitive user information?</h1>
+		<hr/>
+		<p class="lead">Nope, read our <a href="/privacy-policy">Privacy Policy</a>.
+		</p>
+		</div>
+	</div>
+</div>
+	
+<div class="card border-dark mb-3">
+	<div class="card-header">
+		<div class="card-text">
+
+		<h1 class="display-4">What types of queries can I create on Peer Query?</h1>
+		<hr/>
+		<p class="lead">Currently we only support questions, but soon we will add support for more types of queries including polls, exchanges and more.
+		</p>
+		</div>
+	</div>
+</div>
+
+
+  
+  </div>
+  
+  
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+	
+	<br/>
+  <p>Say hello on Steemit chat <a href="https://steemit.chat/direct/peer.query">@PeerQuery</a>.</p>
+
+  </div>
+</div>
+  
+  </div>
+	
+
+  	
+    <div class="col-sm-3">
+
+	  	<div id="sidebar"></div>
+	
+    </div>
+	
+  </div>
+</div>
+
+
+	<div id="footer" style="margin-top: 50px"></div>
+
+
+	
+	
+	
+<script>
+//first load the navbar, sidebar and footer!
+	 $("#navbar").load("/navbar.html");
+     $("#sidebar").load("/sidebar.html");
+     $("#footer").load("/footer.html");
+	 
+	 
+//next get the active tab first before any other thing!
+	 
+
+
+</script>
+	
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "peer-query",
+  "version": "1.0.0",
+  "description": "steem-power query platform",
+  "main": "server.js",
+  "private": true,
+  "dependencies": {
+    "aws-sdk": "latest",
+    "body-parser": "^1.18.2",
+    "express": "latest",
+    "sitemap": "^1.13.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "steem",
+    "peer",
+    "query"
+  ],
+  "author": "makafui george dzivenu",
+  "license": "MIT"
+}
