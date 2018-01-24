@@ -36,6 +36,9 @@ Also, the navbar, sidebar and footer are loaded into "div"s by JQuery. This mean
 
 For a Proof of Concept is, this makes the development process easier as you only edit the navbar, sidebar or footer once and the changes are applied site wide.
 
+## Auth system
+The entire Steem Connect v2 system is located in the navbar.html(which is shared on all pages). The login system is quite messy but works perfectly. It has been trimmed down from a more sophisticaed system(V1) however it still contains a few in-active code from the version 1.
+
 ## Its all yours for re-use!
 Do whatever you want with it. You are responsible for whatever you do with it.
 
