@@ -44,5 +44,13 @@ The entire Steem Connect v2 system is located in the navbar.html(which is shared
 ## Its all yours for re-use!
 Do whatever you want with it. You are responsible for whatever you do with it.
 
+## How to start the server
+* Create your dev folder
+* Do npm install into it
+* Copy all these files into it
+* Do npm install of (express), (body-parser) and (sitemap).
+* Now simply do "node server.js"
+* Visit (http://localhost) or (http://localhost:80) to see Peer Query running
+
 ## Recommendation
 The alpha version is very professional, rich in interface design(Sematic UI) and a STILL open source. If you are considering forking Peer Query, you might want play with this version to understand the workings of Peer Query and then fork the alpha for production work.
