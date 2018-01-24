@@ -14,6 +14,7 @@ The site is built on Node.js and Boostrap. In the json.package file you will fin
 
 **This version is only a Proof of Concept so does not include all the features for a full site.**
 This site runs on Steem Connect v2 so to use it you MUST have your own Steem Connect v2 app - not account.
+The code here is the **absolute** code not source code. That means it contains **everything** that is used to run **www.peerquery.com**, logos, internal links, personal comments, everthing!
 
 ## The following features work:
 * Steem Connect v2 login
