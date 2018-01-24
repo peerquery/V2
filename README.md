@@ -12,7 +12,7 @@ The site is built on Node.js and Boostrap. In the json.package file you will fin
 
 ## What you should know
 
-**This version is only a Prrof of Concept so does not include all the features for a full site.**
+**This version is only a Proof of Concept so does not include all the features for a full site.**
 This site runs on Steem Connect v2 so to use it you MUST have your own Steem Connect v2 app - not account.
 
 ## The following features work:
@@ -25,8 +25,8 @@ This site runs on Steem Connect v2 so to use it you MUST have your own Steem Con
 
 ## What does NOT exist:
 * Threaded comments
-* Parsing content with Makrdown parser
-* Auto linking of images, profile and youtube videos
+* Parsing content with Markdown parser
+* Auto linking of images, profile and Youtube videos
 
 ## Its all yours for re-use!
 Do whatever you want with it. You are responsible for whatever you do with it.
