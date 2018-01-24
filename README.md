@@ -29,6 +29,13 @@ This site runs on Steem Connect v2 so to use it you MUST have your own Steem Con
 * Parsing content with Markdown parser
 * Auto linking of images, profile and Youtube videos
 
+## Lazy loading
+The site is entirely client rendered - not server rendered. this means it is bad for SEO, however it is good for the server load.
+
+Also, the navbar, sidebar and footer are loaded into "div"s by JQuery. This meand that all pages share the very same single navbar, sidebar and footer.
+
+For a Proof of Concept is, this makes the development process easier as you only edit the navbar, sidebar or footer once and the changes are applied site wide.
+
 ## Its all yours for re-use!
 Do whatever you want with it. You are responsible for whatever you do with it.
 
