@@ -5,12 +5,12 @@ This code was trimmed down from the v1 which had DB support and other "advanced"
 
 
 ## How to run it
-In the json.package file you will find all the dependiaries which are:
+The site is built on Node.js and Boostrap. In the json.package file you will find all the dependiaries which are:
 * express
 * sitemap
 * body-parser
 
-##What you should know
+## What you should know
 
 **This version is only a Prrof of Concept so does not include all the features for a full site.**
 This site runs on Steem Connect v2 so to use it you MUST have your own Steem Connect v2 app - not account.
