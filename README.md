@@ -17,6 +17,7 @@ This site runs on Steem Connect v2 so to use it you MUST have your own Steem Con
 
 ## The following features work:
 * Steem Connect v2 login
+* Posting a post
 * Voting post and comment with slidebar
 * Responding/ Commenting
 * Resteeming a post
