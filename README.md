@@ -36,7 +36,7 @@ The site is entirely client rendered - not server rendered. This means could be 
 
 Also, the navbar, sidebar and footer are loaded into "div"s by JQuery. This means that all pages share the very same single navbar, sidebar and footer.
 
-For a Proof of Concept is, this makes the development process easier as you only edit the navbar, sidebar or footer once and the changes are applied site wide.
+For a Proof of Concept site, this makes the development process easier as you only edit the navbar, sidebar or footer once and the changes are applied site wide.
 
 ## Auth system
 The entire Steem Connect v2 system is located in the navbar.html(which is shared on all pages). The login system is quite messy but works perfectly. It has been trimmed down from a more sophisticaed system(V1) however it still contains a few in-active code from the version 1.
