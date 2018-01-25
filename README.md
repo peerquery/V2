@@ -52,5 +52,8 @@ Do whatever you want with it. You are responsible for whatever you do with it.
 * Now simply do "node server.js"
 * Visit (http://localhost) or (http://localhost:80) to see Peer Query running
 
+## Full documentation
+See here https://steemit.com/utopian-io/@dzivenu/documentation-of-peer-query-v2-proof-of-concept
+
 ## Recommendation
 The alpha version is very professional, rich in interface design(Sematic UI) and a STILL open source. If you are considering forking Peer Query, you might want play with this version to understand the workings of Peer Query and then fork the alpha for production work.
